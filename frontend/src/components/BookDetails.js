@@ -40,9 +40,9 @@ const BookDetails = () => {
             </div>
             <div className="BookPage__rightColumn">
               <div className="BookPageTitleSection__title">
-                <h1 className="Text Text__title1">{book.title}</h1>
+                <h1 className="Text Text__title1">Good Read</h1>
               </div>
-              <h3>{book.author}</h3>
+              <h3>Rehan</h3>
               <div className="BookPageMetadataSection__ratingStats">
                 <a className="RatingStatistics" href="/">
                   <div

@@ -60,18 +60,16 @@ export const userType = `
 export const usersResolver = {
   Query: {
     users: async (parent, args, context, info) => {
-      await isAuthenticated(context)
+      await isAuthenticated(context);
       return await Users.find();
     },
   },
   Mutation: {
     createUser: async (parent, args, context, info) => {
-      await isAuthenticated(context)
+      await isAuthenticated(context);
       const { name, email, username, role, password, confirmPassword } = args;
 
-      let user = await Users.findOne({
-        $or: [{ username: username }, { email: email }],
-      });
+      let user = await Users.findOne({ email: email });
 
       if (user) {
         throw new Error("User already exists!");
@@ -129,9 +127,7 @@ export const usersResolver = {
     register: async (parent, args) => {
       const { name, email, username, password, confirmPassword } = args;
 
-      let user = await Users.findOne({
-        $or: [{ username: username }, { email: email }],
-      });
+      let user = await Users.findOne({ email: email });
 
       if (user) {
         throw new Error("User already exists!");

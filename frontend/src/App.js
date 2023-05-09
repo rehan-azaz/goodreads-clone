@@ -7,13 +7,28 @@ import Landing from "./components/Landing";
 import BookDetails from "./components/BookDetails";
 import { isLoggedIn } from "./helpers/auth";
 import Logout from "./pages/Logout";
+import PublicRoute from "./common/PublicRoute";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <Register />
+            </PublicRoute>
+          }
+        />
         <Route
           exact
           path="/"
@@ -23,11 +38,21 @@ function App() {
                 <Home />
               </PrivateRoute>
             ) : (
-              <Landing />
+              <PublicRoute>
+                <Landing />
+              </PublicRoute>
             )
           }
         />
-        <Route exact path="/landing" element={<Landing />} />
+        <Route
+          exact
+          path="/landing"
+          element={
+            <PublicRoute>
+              <Landing />
+            </PublicRoute>
+          }
+        />
 
         <Route
           exact

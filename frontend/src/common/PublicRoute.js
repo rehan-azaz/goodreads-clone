@@ -1,19 +1,11 @@
-import { Navigate } from "react-router-dom";
-import { isLoggedIn } from "../helpers/auth";
-import Layout from './Layout'
+import { logout } from "../helpers/auth";
 import { useEffect } from "react";
 
-const PublicRoutes = ({ children }) => {
-  useEffect(()=> {
-    
-  })
-  return (
-    <>
-      <Layout>
-        {children}
-      </Layout>
-    </>
-  );
+const PublicRoute = ({ children }) => {
+  useEffect(() => {
+    logout();
+  });
+  return <>{children}</>;
 };
 
-export default PublicRoutes;
+export default PublicRoute;

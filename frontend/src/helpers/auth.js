@@ -1,5 +1,4 @@
 import { isExpired, decodeToken } from "react-jwt";
-import { useNavigate } from "react-router-dom";
 
 export const isLoggedIn = () => {
   const token = localStorage.getItem("token");
@@ -9,6 +8,7 @@ export const isLoggedIn = () => {
   const isTokenExpired = isExpired(token);
   return !isTokenExpired;
 };
+
 export const getAuthToken = () => {
   const token = localStorage.getItem("token");
   if (!token) {
@@ -28,3 +28,9 @@ export const getUserRole = () => {
   console.log(decodedToken);
   return decodedToken?.user?.user?.role;
 };
+
+
+export const logout = () => {
+  localStorage.removeItem("token");
+};
+

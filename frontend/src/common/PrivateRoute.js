@@ -4,7 +4,7 @@ import Layout from './Layout'
 
 const PrivateRoutes = ({ children }) => {
   if (!isLoggedIn()) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
   return (
     <>
