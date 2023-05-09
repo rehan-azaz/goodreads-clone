@@ -16,6 +16,7 @@ export const bookType = `
 
   type Query {
     books: [Book!]
+    bookById(id: ID!): Book!
   }
   type Mutation {
     createBook(title: String!, author: String!, date: String!, coverImage: String, bookCollection: String!): Book!
@@ -24,8 +25,8 @@ export const bookType = `
 
 export const booksResolver = {
   Query: {
-    async books (parent, args, context, info) {
-      isAuthenticated(context)
+    async books(parent, args, context, info) {
+      isAuthenticated(context);
       const books = await Books.find();
 
       if (!books) {
@@ -34,17 +35,32 @@ export const booksResolver = {
 
       return books;
     },
+
+    async bookById(parent, args, context, info) {
+      await isAuthenticated(context);
+
+      const book = await Books.findById({
+        _id: args?.id,
+      });
+
+      if (!book) {
+        throw new Error("No Book Found!");
+      }
+
+      return book;
+    },
   },
+
   Mutation: {
-    async createBook (parent, args, context, info) {
+    async createBook(parent, args, context, info) {
       const user = await isAuthenticated(context);
-      if(user) {
+      if (user) {
         const book = await Books.create({
           ...args,
-          createdBy: user._id
+          createdBy: user._id,
         });
 
-        return book
+        return book;
       }
     },
   },

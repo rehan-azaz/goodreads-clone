@@ -45,11 +45,6 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-body {
-  margin: 0;
-  font: 400 1.6rem/1.4375 "Proxima Nova", Montserrat, Arial, sans-serif;
-}
-
 a {
   background: transparent;
 }
@@ -215,9 +210,10 @@ table {
 }
 
 body {
-  margin: 0;
   font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
   font-size: 14px;
+  position: relative;
+  min-height: 100vh;
 }
 
 main {
@@ -383,8 +379,8 @@ h4 {
   border: 1px solid #d8d8d8;
   border-radius: 10px;
   position: absolute;
-  right: 450px;
-  top: 12px;
+  right: 150px;
+  top: 100px;
 }
 
 .cardDiv h2 {
@@ -405,6 +401,8 @@ h4 {
   width: 100%;
   border-radius: 4px;
   padding: 8px;
+  margin-top: 30px;
+  text-decoration: none !important;
 }
 
 .text-center {
@@ -499,17 +497,19 @@ input {
 
 main {
   margin-top: 60px;
+  min-height: calc(100vh - 232px);
 }
 
 /* footer */
 footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
+  position: relative;
   width: 100%;
+  bottom: 0;
+  left: 0;
   background-color: #f4f1ea;
   color: #382110;
   padding: 10px;
+
 }
 
 .Footer__heading {
@@ -699,4 +699,187 @@ a {
 
 .BookPageMetadataSection__genres {
   margin-top: 1.5rem;
+}
+
+/* table */
+#books.table .cover {
+  width: 50px;
+  margin: 0;
+  float: none;
+}
+
+#books.table .field {
+  vertical-align: top;
+  padding: 12px 5px 5px 0;
+}
+
+#books th,
+#books td,
+#authors th,
+#authors td {
+  text-align: left;
+}
+
+#books.table .title,
+#books.table .authors {
+  width: 25%;
+}
+
+#books.table .field {
+  vertical-align: top;
+  padding: 12px 5px 5px 0;
+  color: #00635d;
+}
+
+.stars {
+  color: #aaa;
+  width: 75px;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.star.off,
+.staticStar.p0 {
+  /* background-image: url(../images/starOff.png); */
+  background-size: 15px;
+}
+
+.star {
+  cursor: pointer;
+  background-repeat: no-repeat;
+  height: 15px;
+  width: 15px;
+  float: left;
+  font-size: 0 !important;
+}
+
+.greyText {
+  color: #999999;
+}
+
+.smallText,
+input.smallText {
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  font-size: 11px;
+  line-height: 14px;
+  color: #00635d;
+}
+
+a {
+
+  text-decoration: none;
+}
+
+.input-error {
+  border-color: #d00;
+}
+
+#signIn {
+  font-size: 16px;
+  text-align: center;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  padding-top: 24px;
+}
+
+.u-topGrayBorder {
+  border-top: 1px solid #D8D8D8;
+}
+
+.u-marginTopLarge {
+  margin-top: 24px;
+}
+
+.gr-hyperlink {
+  color: #00635D;
+  text-decoration: none !important;
+}
+
+/* home */
+.gr-h3 {
+  color: #333333;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.15;
+  margin: 12px 0;
+  text-transform: uppercase;
+}
+
+.gr-book__image {
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  float: left;
+  margin-right: 16px;
+  width: auto;
+  max-width: 95px;
+}
+
+.gr-mediaBox__media {
+  float: left;
+  margin-right: 8px;
+}
+
+.gr-book__titleLink {
+  color: #333333;
+  font-family: "Merriweather", "Georgia", serif;
+  font-weight: bold;
+}
+
+.gr-book__title {
+  font-weight: bold;
+  word-wrap: break-word;
+}
+
+.gr-book__author {
+  margin-top: 4px;
+  color: #333333;
+  font-family: "Merriweather", "Georgia", serif;
+  font-size: 12px;
+}
+
+.u-marginTopTiny {
+  margin-top: 4px;
+}
+
+.gr-button--small {
+  font-size: 11px;
+  padding: 4px 12px;
+}
+
+.gr-button--quiet {
+  background-color: transparent;
+  border: 1px solid #382110;
+  color: #382110;
+  font-weight: normal;
+}
+
+.gr-button {
+  border-radius: 3px;
+  border: 1px solid #D6D0C4;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  -moz-appearance: none;
+  -o-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  color: #333333;
+  background-color: #F4F1EA;
+  line-height: 1;
+  margin-top: 10px;
+}
+
+.gr-mediaBox {}
+
+
+.homeSecondaryColumn {
+  width: 300px;
+  float: left;
+  margin-right: 20px;
+  margin-left: 20px;
+  border-bottom: 1px solid #D8D8D8;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
 }

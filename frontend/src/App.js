@@ -1,51 +1,64 @@
-import { Route, Routes, useLocation } from "react-router-dom";
-import Layout from "./common/Layout";
-import PrivateRoutes from "./helpers/PrivateRoutes";
+import { Route, Routes } from "react-router-dom";
+import PrivateRoute from "./common/PrivateRoute";
 import Home from "./components/Home";
-import Login from "./pages/Auth/Login";
-import Register from "./pages/Auth/Register";
-import { isLoggedIn } from "./utils/auth";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Landing from "./components/Landing";
-import BooksListing from "./components/BooksListing";
 import BookDetails from "./components/BookDetails";
-import Footer from "./common/Footer";
-import Header from "./common/Header";
+import { isLoggedIn } from "./helpers/auth";
+import Logout from "./pages/Logout";
 
 function App() {
-  const location = useLocation();
-  const isLoginPage = location.pathname === "/login";
-  const isRegisterPage = location.pathname === "/register";
-  const userLoggedIn = isLoggedIn();
   return (
     <div className="App">
-    <>
-      <Header />
-      <BookDetails />
-      <Footer />
-    </>
-      {/* <Routes>
-        {userLoggedIn ? (
-          !isLoginPage &&
-          !isRegisterPage && (
-            <Route element={<Layout />}>
-              <Route
-                path="/"
-                element={
-                  <>
-                    <Home />
-                  </>
-                }
-              />
-            </Route>
-          )
-        ) : (
-          <>
-            <Route path="/" element={<Landing />} />
-          </>
-        )}
+      <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-      </Routes> */}
+        <Route
+          exact
+          path="/"
+          element={
+            isLoggedIn() ? (
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            ) : (
+              <Landing />
+            )
+          }
+        />
+        <Route exact path="/landing" element={<Landing />} />
+
+        <Route
+          exact
+          path="/home"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/book/:id"
+          exact
+          element={
+            <PrivateRoute>
+              <BookDetails />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/logout"
+          exact
+          element={
+            <PrivateRoute>
+              <Logout />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
     </div>
   );
 }

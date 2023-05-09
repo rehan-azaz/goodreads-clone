@@ -7,7 +7,7 @@ export const userType = `
   type User {
     id: ID!
     name: String!
-    username: String!
+    username: String
     email: String!
     role: String!
     status: String!
@@ -29,7 +29,7 @@ export const userType = `
 
   type CreateUserInput {
     name: String!,
-    username: String!,
+    username: String,
     email: String!,
     password: String!,
     confirmPassword: String!,
@@ -39,7 +39,7 @@ export const userType = `
 
   type RegisterInput {
     name: String!,
-    username: String!,
+    username: String,
     email: String!,
     password: String!,
     confirmPassword: String!,
@@ -51,9 +51,9 @@ export const userType = `
   }
 
   type Mutation {
-    createUser(name: String!, username: String!, email: String!,password: String!, confirmPassword: String!, image: String, role: String, status: String): UserResponse!,
+    createUser(name: String!, username: String, email: String!,password: String!, confirmPassword: String!, image: String, role: String, status: String): UserResponse!,
     login(username: String, email: String, password: String!): UserResponse!,
-    register(name: String!, username: String!, email: String!, password: String!, confirmPassword: String!, image: String): UserResponse!
+    register(name: String!, username: String, email: String!, password: String!, confirmPassword: String!, image: String): UserResponse!
   }
 `;
 

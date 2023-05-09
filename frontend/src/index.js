@@ -11,7 +11,7 @@ import {
 import { BrowserRouter as Router } from "react-router-dom";
 
 const client = new ApolloClient({
-  uri: "https://flyby-router-demo.herokuapp.com/",
+  uri: process.env.REACT_APP_API_URL,
   cache: new InMemoryCache(),
 });
 
