@@ -3,14 +3,14 @@ import logo from "../assets/images/loginLogo.png";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../graphql/mutations";
 import { useNavigate } from "react-router-dom";
+import Loader from "../common/Loader";
 
-const Login = (props) => {
+const Login = () => {
   const [inputData, setInputData] = useState({});
-  const [errors, setErrors] = useState([]);
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
-  const [loginUser] = useMutation(LOGIN);
-  const navigate = useNavigate()
+  const [loginUser, { loading, error }] = useMutation(LOGIN);
+  const navigate = useNavigate();
 
   const handleOnChange = (e) => {
     const name = e.target.name;
@@ -42,22 +42,35 @@ const Login = (props) => {
     if (!error) {
       setEmailError(null);
       setPasswordError(null);
-      const { data } = await loginUser({
+      loginUser({
         variables: {
           email: inputData.email,
           password: inputData.password,
         },
-      });
-
-      if (data && data.login && data.login.token){
-        JSON.stringify(localStorage.setItem("token", data.login.token))
-        navigate("/home")
-      } 
+      })
+        .then(({ data }) => {
+          if (data && data.login && data.login.token) {
+            JSON.stringify(localStorage.setItem("token", data.login.token));
+            navigate("/home");
+          }
+        })
+        .catch((err) => {
+          console.log({ err });
+        });
+      return;
     }
   };
 
   return (
     <div className="wraper-div">
+      {loading && <Loader />}
+
+      {error && (
+        <div className="error-container">
+          <div className="error">{error.message}</div>
+        </div>
+      )}
+
       <div className="logoSection">
         <img src={logo} alt="goodReads" />
       </div>

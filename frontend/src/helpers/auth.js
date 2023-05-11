@@ -25,12 +25,10 @@ export const getUserRole = () => {
   }
 
   const decodedToken = decodeToken(token);
-  console.log(decodedToken);
-  return decodedToken?.user?.user?.role;
-};
 
+  return decodedToken?.user?.role;
+};
 
 export const logout = () => {
   localStorage.removeItem("token");
 };
-

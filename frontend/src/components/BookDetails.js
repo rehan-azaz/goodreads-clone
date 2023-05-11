@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BOOK_BY_ID } from "../graphql/queries";
 import { getAuthToken } from "../helpers/auth";
+import Loader from "../common/Loader";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -16,33 +17,36 @@ const BookDetails = () => {
     variables: { id: id },
   });
 
-  const getBookData = () => {
-    if (data && data.bookById) {
-      setBook(data?.bookById);
-    }
-  };
-
+  console.log({ loading, error, data });
   useEffect(() => {
-    getBookData();
-  }, []);
+    if (data) {
+      setBook(data.bookById);
+    }
+  }, [data]);
 
   return (
     <main>
       <div className="container">
-        {book && (
+        {loading === true && <Loader />}
+        {error && (
+          <div className="error-container">
+            <div className="error">{error.message}</div>
+          </div>
+        )}
+        {data && (
           <div className="BookPage__gridContainer">
             <div className="BookPage__leftColumn">
               <div className="Sticky">
                 <div className="BookCover__image">
-                  <img src={book.coverImg} alt="coverimg" />
+                  <img src={book?.coverImg} alt="coverimg" />
                 </div>
               </div>
             </div>
             <div className="BookPage__rightColumn">
               <div className="BookPageTitleSection__title">
-                <h1 className="Text Text__title1">Good Read</h1>
+                <h1 className="Text Text__title1">{book && book?.title}</h1>
               </div>
-              <h3>Rehan</h3>
+              <h3>{book && book?.author}</h3>
               <div className="BookPageMetadataSection__ratingStats">
                 <a className="RatingStatistics" href="/">
                   <div
@@ -130,24 +134,7 @@ const BookDetails = () => {
                     </span>
                   </div> */}
                     <div className="DetailsLayoutRightParagraph__widthConstrained">
-                      <span className="Formatted">
-                        No matter your goals, <i>Atomic Habits</i> offers a
-                        proven framework for improving—every day. James Clear,
-                        one of the world's leading experts on habit formation,
-                        reveals practical strategies that will teach you exactly
-                        how to form good habits, break bad ones, and master the
-                        tiny behaviors that lead to remarkable results.
-                        <br />
-                        <br />
-                        If you're having trouble changing your habits, the
-                        problem isn't you. The problem is your system. Bad
-                        habits repeat themselves again and again not because you
-                        don't want to change, but because you have the wrong
-                        system for change. You do not rise to the level of your
-                        goals. You fall to the level of your systems. Here,
-                        you'll get a proven system that can take you to new
-                        heights.
-                      </span>
+                      <span className="Formatted"></span>
                     </div>
                   </div>
                 </a>
@@ -171,58 +158,6 @@ const BookDetails = () => {
                           className="Button Button--tag-inline Button--small"
                         >
                           <span className="Button__labelItem">Nonfiction</span>
-                        </a>
-                      </span>
-                      <span className="BookPageMetadataSection__genreButton">
-                        <a
-                          href="https://www.goodreads.com/genres/self-help"
-                          className="Button Button--tag-inline Button--small"
-                        >
-                          <span className="Button__labelItem">Self Help</span>
-                        </a>
-                      </span>
-                      <span className="BookPageMetadataSection__genreButton">
-                        <a
-                          href="https://www.goodreads.com/genres/psychology"
-                          className="Button Button--tag-inline Button--small"
-                        >
-                          <span className="Button__labelItem">Psychology</span>
-                        </a>
-                      </span>
-                      <span className="BookPageMetadataSection__genreButton">
-                        <a
-                          href="https://www.goodreads.com/genres/personal-development"
-                          className="Button Button--tag-inline Button--small"
-                        >
-                          <span className="Button__labelItem">
-                            Personal Development
-                          </span>
-                        </a>
-                      </span>
-                      <span className="BookPageMetadataSection__genreButton">
-                        <a
-                          href="https://www.goodreads.com/genres/productivity"
-                          className="Button Button--tag-inline Button--small"
-                        >
-                          <span className="Button__labelItem">
-                            Productivity
-                          </span>
-                        </a>
-                      </span>
-                      <span className="BookPageMetadataSection__genreButton">
-                        <a
-                          href="https://www.goodreads.com/genres/audiobook"
-                          className="Button Button--tag-inline Button--small"
-                        >
-                          <span className="Button__labelItem">Audiobook</span>
-                        </a>
-                      </span>
-                      <span className="BookPageMetadataSection__genreButton">
-                        <a
-                          href="https://www.goodreads.com/genres/business"
-                          className="Button Button--tag-inline Button--small"
-                        >
-                          <span className="Button__labelItem">Business</span>
                         </a>
                       </span>
                     </span>
@@ -251,131 +186,6 @@ const BookDetails = () => {
             </div>
           </div>
         )}
-      </div>
-      {/* my book section */}
-      <div className="container">
-        <div className="js-dataTooltip">
-          <table id="books" className="table stacked" border="0">
-            <thead>
-              <tr id="booksHeader" className="tableList">
-                <th alt="cover" className="field cover">
-                  <a>cover</a>
-                </th>
-                <th alt="title" className="field title">
-                  <a>title</a>
-                </th>
-                <th alt="author" className="field author" c>
-                  <a>author</a>
-                </th>
-                <th alt="avg_rating" className="field avg_rating">
-                  <a>avg rating</a>
-                </th>
-                <th alt="rating" className="field rating">
-                  <a>rating</a>
-                </th>
-                <th alt="shelves" className="field shelves">
-                  shelves
-                </th>
-                <th alt="review" className="field review">
-                  <a>review</a>
-                </th>
-                <th alt="date_read" className="field date_read">
-                  <a>date read</a>
-                </th>
-                <th alt="date_added" className="field date_added">
-                  <a href="/">date</a>
-                </th>
-              </tr>
-            </thead>
-            <tbody id="booksBody">
-              <tr id="review_5515448925" className="bookalike review">
-                <td className="field cover">
-                  <div className="value">
-                    <div className="js-tooltipTrigger tooltipTrigger">
-                      <a href="/">
-                        {/* <img id="cover_review_5515448925" src={tableCover} alt="cover_review" /> */}
-                      </a>
-                    </div>
-                  </div>
-                </td>
-                <td className="field title">
-                  <div className="value">
-                    <a href="/">
-                      Atomic Habits: An Easy &amp; Proven Way to Build Good
-                      Habits &amp; Break Bad Ones
-                    </a>
-                  </div>
-                </td>
-                <td className="field author">
-                  <div className="value">
-                    <a href="/">Clear, James</a>
-                    <span title="Goodreads Author!">*</span>
-                  </div>
-                </td>
-                <td className="field avg_rating">
-                  <div className="value"> 4.38</div>
-                </td>
-
-                <td className="field rating">
-                  <div className="value">
-                    <div className="stars">
-                      <a href="/" className="star off">
-                        1 of 5 stars
-                      </a>
-                      <a href="/" className="star off">
-                        2 of 5 stars
-                      </a>
-                      <a href="/" className="star off">
-                        3 of 5 stars
-                      </a>
-                      <a href="/" className="star off">
-                        4 of 5 stars
-                      </a>
-                      <a href="/" className="star off">
-                        5 of 5 stars
-                      </a>
-                    </div>
-                  </div>
-                </td>
-                <td className="field shelves">
-                  <div className="value">
-                    <span id="shelfList165239369_40121378">
-                      <span id="shelf_5152779412">
-                        <a
-                          className="shelfLink"
-                          title="View all books in Rehan Khan's to-read shelf."
-                          href="/"
-                        >
-                          to-read
-                        </a>
-                      </span>
-                    </span>
-                    <br />
-                    <a className="shelfChooserLink smallText" href="/">
-                      [edit]
-                    </a>
-                  </div>
-                </td>
-                <td className="field review">
-                  <div className="value">
-                    <a href="/">Write a review</a>
-                  </div>
-                </td>
-                <div className="editable_date date_read_new">
-                  <span className="greyText">not set</span>
-                  <a className="floatingBoxLink smallText" href="/">
-                    [edit]
-                  </a>
-                </div>
-                <td className="field date_added">
-                  <div className="value">
-                    <span title="April 27, 2023">Apr 27, 2023</span>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
     </main>
   );

@@ -19,14 +19,17 @@ const bookSchema = new Schema(
     },
     bookCollection: {
       type: String,
-      enum: ['Want to read', 'Reading', 'Read'],
+      enum: ["Want to read", "Reading", "Read"],
       required: true,
     },
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: "Users",
-      required: true
-    }
+      required: true,
+    },
+    genre: {
+      type: [String],
+    },
   },
   {
     timestamps: true,
