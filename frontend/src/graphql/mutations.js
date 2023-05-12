@@ -41,3 +41,32 @@ export const REGISTER = gql`
     }
   }
 `;
+
+export const CREATE_BOOK = gql`
+  mutation register(
+    $title: String!
+    $author: String!
+    $published: String!
+    $description: String!
+    $coverImage: Upload!
+  ) {
+    createBook(
+      title: $title
+      author: $author
+      published: $published
+      description: $description
+      coverImage: $coverImage
+      published: $published
+    ) {
+      user {
+        id
+        title
+        author
+        published
+        description
+        coverImage
+      }
+      token
+    }
+  }
+`;

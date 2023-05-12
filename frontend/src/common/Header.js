@@ -20,25 +20,15 @@ const Header = () => {
                   Home
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink to="/mybooks" className={"nav-link"}>
-                  My Books
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink to="/" className={"nav-link"}>
-                  Browse ▾
-                </NavLink>
-              </li>
             </ul>
           </nav>
 
           {/* search box */}
           <div className="search-box">
-            <form className="search-form">
+            {/* <form className="search-form">
               <input className="search-input" />
               <button className="search-btn"></button>
-            </form>
+            </form> */}
           </div>
 
           {/* personal section */}

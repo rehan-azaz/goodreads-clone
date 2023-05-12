@@ -4,7 +4,7 @@ import { Ratings } from "../../models/RatingsModel.js";
 export const ratingType = `
   type Rating {
     id: ID!
-    rating: Int!
+    rating: Float!
     review: String
     user: String!
     book: String!
@@ -16,7 +16,7 @@ export const ratingType = `
     ratings: [Rating!]
   }
   type Mutation {
-    addRating(rating: Int!, review: String!, book: String!): Rating!
+    addRating(rating: Float!, review: String, book: String!): Rating!
   }
 `;
 

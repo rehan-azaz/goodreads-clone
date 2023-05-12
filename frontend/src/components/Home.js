@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { useQuery } from "@apollo/client";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
+import moment from "moment";
 
 import { ALL_BOOKS } from "../graphql/queries";
 import { getAuthToken, getUserRole } from "../helpers/auth";
 import Loader from "../common/Loader";
 import CreateBookModal from "../common/modals/CreateBookModal";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -30,18 +34,18 @@ const Home = () => {
       sortable: true,
     },
     {
+      name: "Published",
+      selector: (row) => row.published,
+      sortable: true,
+    },
+    {
       name: "Avg Rating",
       selector: (row) => row.avgRating,
       sortable: true,
     },
     {
-      name: "Rating",
-      selector: (row) => row.rating,
-      sortable: true,
-    },
-    {
-      name: "Shelves",
-      selector: (row) => row.shelves,
+      name: "Shelve",
+      selector: (row) => row.shelve,
       sortable: true,
     },
     {
@@ -84,6 +88,33 @@ const Home = () => {
             <img src={data[i].coverImg} alt={data[i].title || ""} />
           )) ||
           "",
+        avgRating:
+          (data[i] && data[i].avgRating && data[i].avgRating.toFixed(2)) || "-",
+        published:
+          (data[i] &&
+            data[i].published &&
+            moment(Date(data[i].published)).format("YYYY-MM-DD")) ||
+          "-",
+        shelve: (data[i] && data[i].shelve) || "-",
+        actions: (
+          <>
+            <Link
+              to={`/book/${data[i]._id}`}
+              className="btn-view"
+              title="View Book"
+            >
+              <FontAwesomeIcon icon={faEye} />
+            </Link>
+
+            <button className="btn-edit" title="Edit">
+              <FontAwesomeIcon icon={faPencilAlt} />
+            </button>
+
+            <button className="btn-delete" title="Delete">
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
+          </>
+        ),
       };
 
       list.push(row);
@@ -104,7 +135,7 @@ const Home = () => {
           <CreateBookModal modalIsOpen={isModalOpen} closeModal={closeModal} />
         )}
         <div className="currentlyReadingShelf homeSecondaryColumn">
-          <h3 className="gr-h3">Currently Reading</h3>
+          {/* <h3 className="gr-h3">Currently Reading</h3>
           <div className="">
             <div className="gr-mediaBox">
               <a href="/">
@@ -163,9 +194,9 @@ const Home = () => {
                 <button className="gr-buttonAsLink">General update</button>
               </span>
             </span>
-          </span>
+          </span> */}
           {/* 2nd section */}
-          <section className="gr-homePageRailContainer u-paddingBottomMedium showForLargeWidth">
+          {/* <section className="gr-homePageRailContainer u-paddingBottomMedium showForLargeWidth">
             <h3 className="sectionHeading">Want to Read</h3>
             <div>
               <div className="shelfDisplay">
@@ -181,7 +212,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
           {/* 3rd section */}
           <section className="showForLargeWidth">
             <h3 className="sectionHeading">Bookshelves</h3>
@@ -189,7 +220,7 @@ const Home = () => {
               <div className="userShelvesBookCounts">
                 <div className="userShelvesBookCounts__counts">
                   <a className="u-displayBlock" href="/user_shelves/539558125">
-                    1
+                    0
                   </a>
                   <a
                     className="u-displayBlock"
@@ -197,7 +228,7 @@ const Home = () => {
                     aria-label="Currently Reading shelf. 1 books."
                     data-reactid=".257496dsocc.0.$currently-reading"
                   >
-                    1
+                    0
                   </a>
                   <a
                     className="u-displayBlock"

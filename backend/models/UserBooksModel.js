@@ -12,7 +12,7 @@ const userBooksSchema = new Schema(
       ref: "Books",
       required: true,
     },
-    bookCollection: {
+    shelve: {
       type: String,
       enum: ["Want to read", "Reading", "Read"],
       required: true,

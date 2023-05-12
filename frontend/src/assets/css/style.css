@@ -95,7 +95,7 @@ pre {
 }
 
 q {
-  quotes: "\201C" "\201D" "\2018" "\2019";
+  quotes: "\201C""\201D""\2018""\2019";
 }
 
 small {
@@ -636,11 +636,11 @@ ul {
   display: inline-block;
   font-weight: 600;
   font-size: 2.6rem;
+  padding-left: 10px;
 }
 
 .RatingStatistics__meta {
   display: inline-block;
-  padding-left: 10px;
 }
 
 .u-dot-before {
@@ -990,7 +990,6 @@ a {
   display: flex;
 }
 
-
 .createBook-container {
   display: flex;
   justify-content: end;
@@ -1001,11 +1000,185 @@ a {
   width: auto;
 }
 
-
 .dataTable th::before {
   font-weight: bold;
 }
 
 .rightSection {
   width: 80%;
+}
+.btn-view,
+.btn-edit,
+.btn-delete {
+  display: inline-block;
+  padding: 6px;
+  border: none;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-view {
+  background-color: #007bff; /* blue */
+}
+
+.btn-edit {
+  background-color: #28a745; /* green */
+}
+
+.btn-delete {
+  background-color: #dc3545; /* red */
+}
+
+.btn-view svg,
+.btn-edit svg,
+.btn-delete svg {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.btn-view svg path,
+.btn-edit svg path,
+.btn-delete svg path {
+  fill: currentColor;
+}
+
+.modal {
+  display: none; /* Hide the modal by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 10px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Close button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.close-modal-icon {
+  display: flex;
+  justify-content: end;
+}
+
+.close-modal-icon button {
+  background: transparent;
+  border: none;
+}
+
+.close-modal-icon button svg {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.form-input-container {
+  margin-bottom: 10px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.form-input-error {
+  border: 1px solid red !important;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.form-button {
+  display: block;
+  margin: 15px auto 0;
+  padding: 10px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background-color: #0069d9;
+}
+
+.dropzone-container {
+  padding: 15px;
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.dropzone-container-error {
+  padding: 15px;
+  border: 2px dashed red !important;
+  border-radius: 5px;
+  text-align: center;
+}
+.upload-icon {
+  margin-bottom: 10px;
+}
+
+.upload-icon svg {
+  width: 50px;
+  height: 50px;
+}
+
+.personal {
+  display: flex;
+  justify-content: end;
+  float: left;
 }

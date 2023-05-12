@@ -3,14 +3,25 @@ import { gql } from "@apollo/client";
 export const ALL_BOOKS = gql`
   query allBooks {
     books {
-      id
+      _id
       title
       author
-      date
+      published
       bookCollection
+      description
       createdBy
       createdAt
       updatedAt
+      avgRating
+      shelve
+      rating {
+        rating
+        review
+        ratingUser {
+          id
+          name
+        }
+      }
     }
   }
 `;
@@ -18,13 +29,25 @@ export const ALL_BOOKS = gql`
 export const BOOK_BY_ID = gql`
   query bookById($id: ID!) {
     bookById(id: $id) {
-      id
+      _id
       title
       author
-      date
-      coverImage
+      published
       bookCollection
+      description
       createdBy
+      createdAt
+      updatedAt
+      avgRating
+      shelve
+      rating {
+        rating
+        review
+        ratingUser {
+          id
+          name
+        }
+      }
     }
   }
 `;

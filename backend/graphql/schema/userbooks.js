@@ -6,7 +6,7 @@ export const userBooksType = `
     id: ID!
     user: String!
     book: String!
-    bookCollection: String
+    shelve: String
     finished: Boolean
     createdAt: String
     updatedAt: String
@@ -17,7 +17,7 @@ export const userBooksType = `
     getUserBooksByUser(user: String!): [UserBook!]
 }
 type Mutation {
-    addUserBooks(user: String!, book: String!, bookCollection: String!, finished: Boolean): UserBook!
+    addUserBooks(user: String!, book: String!, shelve: String!, finished: Boolean): UserBook!
   }
 `;
 

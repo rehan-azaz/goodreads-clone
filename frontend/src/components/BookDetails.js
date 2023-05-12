@@ -1,9 +1,12 @@
 import { useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ReactStarRatings from "react-star-ratings";
+
 import { BOOK_BY_ID } from "../graphql/queries";
 import { getAuthToken } from "../helpers/auth";
 import Loader from "../common/Loader";
+import StarRating from "../common/StarRating";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -54,73 +57,23 @@ const BookDetails = () => {
                     aria-label="Average rating of 4.38 stars."
                     role="figure"
                   >
-                    <div className="RatingStar--medium">
-                      <svg viewBox="0 0 24 24" role="presentation">
-                        <path
-                          className="RatingStar__fill"
-                          d="M24 9.63469C24 9.35683 23.7747 9.13158 23.4969 9.13158H15.0892L12.477 1.34327C12.4269 1.19375 12.3095 1.0764 12.16 1.02625C11.8966 0.937894 11.6114 1.07983 11.523 1.34327L8.91088 9.13158H0.503157C0.33975 9.13158 0.186521 9.21094 0.0922364 9.3444C-0.0680877 9.57134 -0.0140806 9.88529 0.212865 10.0456L7.00408 14.8432L4.40172 22.6166C4.35092 22.7683 4.37534 22.9352 4.46749 23.066C4.6275 23.2932 4.94137 23.3476 5.16853 23.1876L12 18.3758L18.8317 23.183C18.9625 23.2751 19.1293 23.2994 19.281 23.2486C19.5445 23.1604 19.6865 22.8752 19.5983 22.6117L16.996 14.8432L23.7872 10.0456C23.9206 9.95133 24 9.7981 24 9.63469Z"
-                        ></path>
-                      </svg>
+                    <ReactStarRatings
+                      rating={book && book.avgRating}
+                      starRatedColor="#ffc107"
+                      starEmptyColor="#ccc"
+                      starDimension="20px"
+                      starSpacing="2px"
+                    />
+                    {/* <StarRating rating={book && book.avgRating} /> */}
+                    <div className="RatingStatistics__rating">
+                      {book && book.avgRating && book.avgRating.toFixed(2)}
                     </div>
-                    <div className="RatingStar--medium">
-                      <svg viewBox="0 0 24 24" role="presentation">
-                        <path
-                          className="RatingStar__fill"
-                          d="M24 9.63469C24 9.35683 23.7747 9.13158 23.4969 9.13158H15.0892L12.477 1.34327C12.4269 1.19375 12.3095 1.0764 12.16 1.02625C11.8966 0.937894 11.6114 1.07983 11.523 1.34327L8.91088 9.13158H0.503157C0.33975 9.13158 0.186521 9.21094 0.0922364 9.3444C-0.0680877 9.57134 -0.0140806 9.88529 0.212865 10.0456L7.00408 14.8432L4.40172 22.6166C4.35092 22.7683 4.37534 22.9352 4.46749 23.066C4.6275 23.2932 4.94137 23.3476 5.16853 23.1876L12 18.3758L18.8317 23.183C18.9625 23.2751 19.1293 23.2994 19.281 23.2486C19.5445 23.1604 19.6865 22.8752 19.5983 22.6117L16.996 14.8432L23.7872 10.0456C23.9206 9.95133 24 9.7981 24 9.63469Z"
-                        ></path>
-                      </svg>
-                    </div>
-                    <div className="RatingStar--medium">
-                      <svg viewBox="0 0 24 24" role="presentation">
-                        <path
-                          className="RatingStar__fill"
-                          d="M24 9.63469C24 9.35683 23.7747 9.13158 23.4969 9.13158H15.0892L12.477 1.34327C12.4269 1.19375 12.3095 1.0764 12.16 1.02625C11.8966 0.937894 11.6114 1.07983 11.523 1.34327L8.91088 9.13158H0.503157C0.33975 9.13158 0.186521 9.21094 0.0922364 9.3444C-0.0680877 9.57134 -0.0140806 9.88529 0.212865 10.0456L7.00408 14.8432L4.40172 22.6166C4.35092 22.7683 4.37534 22.9352 4.46749 23.066C4.6275 23.2932 4.94137 23.3476 5.16853 23.1876L12 18.3758L18.8317 23.183C18.9625 23.2751 19.1293 23.2994 19.281 23.2486C19.5445 23.1604 19.6865 22.8752 19.5983 22.6117L16.996 14.8432L23.7872 10.0456C23.9206 9.95133 24 9.7981 24 9.63469Z"
-                        ></path>
-                      </svg>
-                    </div>
-                    <div className="RatingStar--medium">
-                      <svg viewBox="0 0 24 24" role="presentation">
-                        <path
-                          className="RatingStar__fill"
-                          d="M24 9.63469C24 9.35683 23.7747 9.13158 23.4969 9.13158H15.0892L12.477 1.34327C12.4269 1.19375 12.3095 1.0764 12.16 1.02625C11.8966 0.937894 11.6114 1.07983 11.523 1.34327L8.91088 9.13158H0.503157C0.33975 9.13158 0.186521 9.21094 0.0922364 9.3444C-0.0680877 9.57134 -0.0140806 9.88529 0.212865 10.0456L7.00408 14.8432L4.40172 22.6166C4.35092 22.7683 4.37534 22.9352 4.46749 23.066C4.6275 23.2932 4.94137 23.3476 5.16853 23.1876L12 18.3758L18.8317 23.183C18.9625 23.2751 19.1293 23.2994 19.281 23.2486C19.5445 23.1604 19.6865 22.8752 19.5983 22.6117L16.996 14.8432L23.7872 10.0456C23.9206 9.95133 24 9.7981 24 9.63469Z"
-                        ></path>
-                      </svg>
-                    </div>
-                    <div className="RatingStar--medium">
-                      <svg viewBox="0 0 24 24" role="presentation">
-                        <defs>
-                          <clipPath
-                            id="clip_clhczx56a00yh2v6y71wrsx9y"
-                            className="RatingStar__backgroundFill"
-                          >
-                            <path
-                              className="RatingStar__fill"
-                              d="M24 9.63469C24 9.35683 23.7747 9.13158 23.4969 9.13158H15.0892L12.477 1.34327C12.4269 1.19375 12.3095 1.0764 12.16 1.02625C11.8966 0.937894 11.6114 1.07983 11.523 1.34327L8.91088 9.13158H0.503157C0.33975 9.13158 0.186521 9.21094 0.0922364 9.3444C-0.0680877 9.57134 -0.0140806 9.88529 0.212865 10.0456L7.00408 14.8432L4.40172 22.6166C4.35092 22.7683 4.37534 22.9352 4.46749 23.066C4.6275 23.2932 4.94137 23.3476 5.16853 23.1876L12 18.3758L18.8317 23.183C18.9625 23.2751 19.1293 23.2994 19.281 23.2486C19.5445 23.1604 19.6865 22.8752 19.5983 22.6117L16.996 14.8432L23.7872 10.0456C23.9206 9.95133 24 9.7981 24 9.63469Z"
-                            ></path>
-                          </clipPath>
-                          <path
-                            id="path_clhczx56a00yh2v6y71wrsx9y"
-                            d="M24 9.63469C24 9.35683 23.7747 9.13158 23.4969 9.13158H15.0892L12.477 1.34327C12.4269 1.19375 12.3095 1.0764 12.16 1.02625C11.8966 0.937894 11.6114 1.07983 11.523 1.34327L8.91088 9.13158H0.503157C0.33975 9.13158 0.186521 9.21094 0.0922364 9.3444C-0.0680877 9.57134 -0.0140806 9.88529 0.212865 10.0456L7.00408 14.8432L4.40172 22.6166C4.35092 22.7683 4.37534 22.9352 4.46749 23.066C4.6275 23.2932 4.94137 23.3476 5.16853 23.1876L12 18.3758L18.8317 23.183C18.9625 23.2751 19.1293 23.2994 19.281 23.2486C19.5445 23.1604 19.6865 22.8752 19.5983 22.6117L16.996 14.8432L23.7872 10.0456C23.9206 9.95133 24 9.7981 24 9.63469Z"
-                          ></path>
-                        </defs>
-                        <use
-                          clipPath="url(#clip_clhczx56a00yh2v6y71wrsx9y)"
-                          href="/"
-                          className="RatingStar__backgroundFill"
-                        ></use>
-                        <path
-                          className="RatingStar__fill"
-                          d="M6 9.13135H0.503157C0.33975 9.13135 0.186521 9.21071 0.0922364 9.34417C-0.0680877 9.57112 -0.0140806 9.88506 0.212865 10.0454L6 14.1337V9.13135Z M6 17.8422L4.40172 22.6164C4.35092 22.7681 4.37534 22.935 4.46749 23.0658C4.6275 23.293 4.94137 23.3474 5.16853 23.1874L6 22.6018V17.8422Z"
-                        ></path>
-                      </svg>
-                    </div>
-                    <div className="RatingStatistics__rating">4.38</div>
                     <div className="RatingStatistics__meta">
                       <span data-testid="ratingsCount">
-                        619,723&nbsp;ratings
+                        {book && book.rating && book.rating.length}&nbsp;ratings
                       </span>
                       <span data-testid="reviewsCount" className="u-dot-before">
-                        42,030&nbsp;reviews
+                        {book && book.rating && book.rating.length}&nbsp;reviews
                       </span>
                     </div>
                     {/* <div classNamee="ChoiceAwardBadge">
@@ -146,7 +99,7 @@ const BookDetails = () => {
                     className="CollapsableList"
                     aria-label="Top genres for this book"
                   >
-                    <span tabIndex="-1">
+                    {/* <span tabIndex="-1">
                       <span className="BookPageMetadataSection__genrePlainText">
                         <span className="Text Text__body3 Text__subdued">
                           Genres
@@ -160,7 +113,7 @@ const BookDetails = () => {
                           <span className="Button__labelItem">Nonfiction</span>
                         </a>
                       </span>
-                    </span>
+                    </span> */}
                     <span tabIndex="-1"></span>{" "}
                     <div className="Button__container">
                       <button
